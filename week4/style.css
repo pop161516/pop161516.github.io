@@ -1,0 +1,38 @@
+body {
+  font-size: 1rem;
+  text-align: center;
+  margin: 0 auto;
+  /* horizontal centering */
+}
+
+h1 {
+  font-size: 1.6rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+p {
+  width: 400px;
+  border-bottom: 4px dashed rgb(19, 48, 19);
+  background-color: rgba(45, 101, 76, 0.348);
+  padding: 20px;
+  margin: auto;
+  margin-bottom: 10px;
+  /* padding: 20px 10px 10px 50px; */
+}
+
+.vcenter {
+  font-size: 2rem;
+  line-height: 160px;
+  /* high - top padding - bottom padding */
+  /* 200 - 20 - 20 = 160  ??? */
+}
+
+span {
+  color: rgb(185, 31, 185);
+  /*  span should be inline, dont -> display: block; */
+}
