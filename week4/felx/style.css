@@ -1,3 +1,5 @@
+/* https://colorhunt.co/palette/1a120b3c2a21d5cea3e5e5cb */
+
 body {
   background-color: #1a120b;
   display: flex;
@@ -13,4 +15,46 @@ body {
   color: #e5e5cb;
   /* color: #3c2a21; */
   font-size: 1.1rem;
+}
+
+.outer {
+  width: 400px;
+  border: 2px dashed #e5e5cb56;
+  min-height: 100px;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  /* flex-start, felx-end, center, space-around, space-between */
+  align-items: center;
+  /* strech, flex-start, flex-end, center */
+  flex-direction: row;
+  /* row, column, row-reverse */
+
+  flex-wrap: wrap;
+}
+
+.limebox {
+  background-color: limegreen;
+  color: #3c2a21;
+  padding: 10px;
+}
+
+.coralbox {
+  background-color: coral;
+  color: #3c2a21;
+  padding: 10px;
+}
+
+.plumbox {
+  background-color: plum;
+  color: #3c2a21;
+  padding: 10px;
+}
+
+/* .outer > * {
+  flex: 1;
+} */
+
+.outer > * {
+  flex: 1;
 }
