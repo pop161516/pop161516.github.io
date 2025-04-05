@@ -1,3 +1,4 @@
+/* font styling */
 body {
   background-color: #2b2b2b;
   font-family: "Shantell Sans", cursive;
@@ -6,14 +7,14 @@ body {
   font-style: normal;
   font-variation-settings: "BNCE" 0, "INFM" 0, "SPAC" 0;
 
+  /* flex over whole body */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 100vh;
-  margin: 0;
 }
 
+/* headings */
 h1 {
   font-size: 2.5rem;
   margin: 20px;
@@ -22,8 +23,10 @@ h1 {
 h2 {
   font-size: 1.5rem;
   margin: 5px;
+  text-align: center;
 }
 
+/* chapter bubbles */
 .chapter {
   font-size: 1.5rem;
   min-width: 75%;
@@ -34,26 +37,25 @@ h2 {
   margin: 20px;
 }
 
-.container1 {
+/* containers */
+.container1_2 {
   display: flex;
   gap: 20px;
   justify-content: space-between;
-  /* width: 850px; */
   max-width: 90%;
   padding: 20px;
 }
 
-.container2 {
+.container3_4 {
   display: flex;
   gap: 20px;
   justify-content: space-between;
   align-items: center;
-  /* width: 1200px; */
   max-width: 90%;
   padding: 20px;
 }
 
-.container3 {
+.containerHouse1 {
   margin-top: 20px;
   display: flex;
   justify-content: center;
@@ -62,9 +64,8 @@ h2 {
   flex-direction: row;
 }
 
-.container4 {
+.container5_6_7 {
   padding-left: 10%;
-
   display: flex;
   max-width: 60%;
   gap: 20px;
@@ -73,9 +74,8 @@ h2 {
   flex-direction: column;
 }
 
-.container5 {
+.container8 {
   padding-right: 10%;
-
   display: flex;
   max-width: 60%;
   gap: 20px;
@@ -84,7 +84,7 @@ h2 {
   flex-direction: column;
 }
 
-.container6 {
+.container9_10_11 {
   display: flex;
   width: 60%;
   gap: 20px;
@@ -93,11 +93,23 @@ h2 {
   flex-direction: column;
   text-align: center;
 }
+.container12_13 {
+  display: flex;
+  width: 60%;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+  text-align: left;
+  padding-bottom: 40px;
+}
 
+/* formating bold questions */
 .question {
   font-weight: bold;
 }
 
+/* left adn right text-aligning */
 .left {
   text-align: left;
 }
@@ -106,21 +118,8 @@ h2 {
   text-align: right;
 }
 
-.outer {
-  width: 600px;
-  border: 2px dashed #e5e5cb56;
-  height: 100px;
-  display: flex;
-  gap: 10px;
-  justify-content: space-between;
-  /* flex-start, felx-end, center, space-around, space-between */
-  align-items: center;
-  /* strech, flex-start, flex-end, center */
-  flex-direction: row;
-  /* row, column, row-reverse */
-  /* flex-wrap: wrap; */
-}
-
-#id {
-  margin-bottom: 40px;
+/* styling for image 2 */
+.imgstyle {
+  max-width: 75%;
+  border: 4px solid #ffa444;
 }
