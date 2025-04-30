@@ -8,42 +8,86 @@
     <link
       rel="apple-touch-icon"
       sizes="180x180"
-      href="/assignment2/apple-touch-icon.png"
+      href="/assignment2/assets/images/favcon/apple-touch-icon.png"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="32x32"
-      href="/assignment2/favicon-32x32.png"
+      href="/assignment2/assets/images/favcon/favicon-32x32.png"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="/assignment2/favicon-16x16.png"
+      href="/assignment2/assets/images/favcon/favicon-16x16.png"
     />
-    <link rel="manifest" href="/assignment2/site.webmanifest" />
+    <link
+      rel="manifest"
+      href="/assignment2/assets/images/favcon/site.webmanifest"
+    />
 
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
-    <div class="outer">
-      <section class="audio-container">
-        <audio src="studyMusic.mp3" id="my-audio"></audio>
-      </section>
-      <section class="audio-controls">
-        <button id="play-pause-button">
-          <img
-            id="play-pause-img"
-            src="play--v1.png"
-            alt="Play Button"
-            width="24"
-            height="24"
-          />
-        </button>
-      </section>
+    <div class="audio-player">
+      <div class="player-content">
+        <section class="audio-info">
+          <!-- in this section, we display the name of the audio and current playtime -->
+          <h1 id="audio-name"></h1>
+          <h2 id="audio-artist"></h2>
+          <!-- <h1>Current playtime: <span id="audio-time">0.00</span></h1> -->
+        </section>
+        <section class="audio-container">
+          <audio src="assets/study-music.mp3" id="my-audio"></audio>
+        </section>
+        <div class="progress-bar">
+          <span id="progress-bar-fill"></span>
+        </div>
+        <section class="audio-controls-one">
+          <button id="back-button">
+            <img
+              id="back-img"
+              src="/assignment2/assets/images/back.png"
+              alt="Back Button"
+              width="32"
+              height="24"
+            />
+          </button>
+          <button id="play-pause-button">
+            <img
+              id="play-pause-img"
+              src="/assignment2/assets/images/play.png"
+              alt="Play Button"
+              width="24"
+              height="24"
+            />
+          </button>
+          <button id="forward-button">
+            <img
+              id="forward-img"
+              src="/assignment2/assets/images/next.png"
+              alt="Play Button"
+              width="32"
+              height="24"
+            />
+          </button>
+        </section>
+        <section class="audio-controles-two">
+          <button id="volume-button">
+            <img
+              id="play-pause-img"
+              src="/assignment2/assets/images/sound.png"
+              alt="Play Button"
+              width="34"
+              height="24"
+            />
+          </button>
+        </section>
+      </div>
     </div>
+    <button id="pipButton">Open Picture-in-Picture window</button>
   </body>
 </html>
