@@ -21,8 +21,6 @@ body {
 .player-content {
   background-color: #d9d9d9;
   border-radius: 50px;
-  width: 500px;
-  min-height: 300px;
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -30,6 +28,11 @@ body {
   /* align-items: center; */
   gap: 1rem;
   /* flex-wrap: wrap; */
+}
+
+.audio-player {
+  height: 300px;
+  min-width: 500px;
 }
 
 img {
@@ -48,17 +51,6 @@ button {
   gap: 1rem;
   /* width: 200px; */
   flex: 1;
-}
-
-.audio-controls-one {
-  flex-direction: column;
-  /* background-color: aqua; */
-  gap: 1rem;
-}
-
-.audio-controls button {
-  width: 30px;
-  height: 30px;
 }
 
 .audio-info {
@@ -94,7 +86,36 @@ button {
   transition: width 0.5s ease;
 }
 
-#pipButton {
-  background-color: coral;
-  border: 0px;
+#volumeSlider {
+  -webkit-appearance: none;
+  height: 8px;
+  border-radius: 5px;
+  background: #730002;
+  /* margin-right: 15px; */
+}
+
+#volumeSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 5px;
+  width: 5px;
+  height: 20px;
+  background: #730002;
+}
+
+#volumeSlider::-webkit-slider-thumb:hover {
+  cursor: pointer;
+  height: 30px;
+}
+
+.row2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 10px;
+  justify-content: center;
+}
+
+.slider-container {
+  display: inline;
 }

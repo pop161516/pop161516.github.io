@@ -3,19 +3,21 @@ const audioList = [
   {
     name: "Deep Ambient Relaxation Music",
     artist: "RMIT",
-    link: "/assignment2/assets/study-music.mp3",
+    link: "https://ia801507.us.archive.org/33/items/interactive-media-assignment-2-sound/InteractiveMediaAssignment2Sound.mp3",
   },
   {
     name: "Lofi Study Beat 3",
     artist: "officeMIKADO - pixabay",
-    link: "/assignment2/assets/lofi-study-beat.mp3",
+    link: "https://ia801507.us.archive.org/33/items/interactive-media-assignment-2-sound/lofi-study-beat-3-245774.mp3",
   },
   {
     name: "Gentle Ambient Atmosphere",
     artist: "Allicante - pixabay",
-    link: "/assignment2/assets/ambient-atmosphere.mp3",
+    link: "https://ia801507.us.archive.org/33/items/interactive-media-assignment-2-sound/gentle-ambient-atmosphere-332292.mp3",
   },
 ];
+
+var pipActive = false;
 
 //finding song name, audio data, play/pause button,
 const audioName = document.querySelector("#audio-name");
@@ -154,5 +156,27 @@ function playAudioAtIndex(index) {
     myAudio.play();
   } else if (myAudio.pause) {
     myAudio.pause();
+  }
+}
+
+//volumes slider code
+const volumeSlider = document.getElementById("volumeSlider");
+
+volumeSlider.addEventListener("input", () => {
+  myAudio.volume = volumeSlider.value / 100;
+});
+
+const volumeButton = document.getElementById("volume-button");
+volumeButton.addEventListener("click", toggleVolumeSlider);
+
+function toggleVolumeSlider() {
+  if (
+    volumeSlider.style.display === "inline" ||
+    volumeSlider.style.display === ""
+  ) {
+    volumeSlider.style.display = "none";
+    console.log(`${volumeSlider.style.display}`);
+  } else {
+    volumeSlider.style.display = "inline";
   }
 }
