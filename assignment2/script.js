@@ -70,43 +70,64 @@ function updateProgressBar() {
 
 //maintain style in pip
 pipButton.addEventListener("click", async () => {
-  const player = document.querySelector(".player-content");
+  if (pipActive == false) {
+    const player = document.querySelector(".player-content");
 
-  // Open a Picture-in-Picture window.
-  const pipWindow = await documentPictureInPicture.requestWindow();
+    // Open a Picture-in-Picture window.
+    const pipWindow = await documentPictureInPicture.requestWindow();
+    pipActive = true;
+    console.log(pipActive);
 
-  // Copy style sheets over from the initial document
-  // so that the player looks the same.
-  [...document.styleSheets].forEach((styleSheet) => {
-    try {
-      const cssRules = [...styleSheet.cssRules]
-        .map((rule) => rule.cssText)
-        .join("");
-      const style = document.createElement("style");
+    // Copy style sheets over from the initial document
+    // so that the player looks the same.
+    [...document.styleSheets].forEach((styleSheet) => {
+      try {
+        const cssRules = [...styleSheet.cssRules]
+          .map((rule) => rule.cssText)
+          .join("");
+        const style = document.createElement("style");
 
-      style.textContent = cssRules;
-      pipWindow.document.head.appendChild(style);
-    } catch (e) {
-      const link = document.createElement("link");
+        style.textContent = cssRules;
+        pipWindow.document.head.appendChild(style);
+      } catch (e) {
+        const link = document.createElement("link");
 
-      link.rel = "stylesheet";
-      link.type = styleSheet.type;
-      link.media = styleSheet.media;
-      link.href = styleSheet.href;
-      pipWindow.document.head.appendChild(link);
-    }
-  });
+        link.rel = "stylesheet";
+        link.type = styleSheet.type;
+        link.media = styleSheet.media;
+        link.href = styleSheet.href;
+        pipWindow.document.head.appendChild(link);
+      }
+    });
 
-  // Move the player to the Picture-in-Picture window.
-  pipWindow.document.body.append(player);
+    // Move the player to the Picture-in-Picture window.
+    pipWindow.document.body.append(player);
 
-  // Move the player back when the Picture-in-Picture window closes.
-  pipWindow.addEventListener("pagehide", (event) => {
-    const playerContainer = document.querySelector(".audio-player");
-    const pipPlayer = event.target.querySelector(".player-content");
-    playerContainer.append(pipPlayer);
-  });
+    // Move the player back when the Picture-in-Picture window closes.
+    pipWindow.addEventListener("pagehide", (event) => {
+      const playerContainer = document.querySelector(".audio-player");
+      const pipPlayer = event.target.querySelector(".player-content");
+      playerContainer.append(pipPlayer);
+      pipActive = false;
+    });
+  }
 });
+
+// const pipButton = document.getElementById("pipButton");
+
+// pipButton.addEventListener("click", async () => {
+//   try {
+//     if (document.pictureInPictureElement) {
+//       await document.exitPictureInPicture();
+//     } else {
+//       // Must be playing to enter PiP in some browsers
+//       if (myAudio.paused) await myAudio.play();
+//       await myAudio.requestPictureInPicture();
+//     }
+//   } catch (error) {
+//     console.error("PiP error:", error);
+//   }
+// });
 
 //-----------------------//
 //code taken from class example

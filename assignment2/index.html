@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Video player assignment</title>
 
+    <!-- <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" /> -->
+
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -32,6 +37,61 @@
     <script src="script.js" defer></script>
   </head>
   <body>
+    <div id="mainUI">
+      <div id="UIimagesOne">
+        <div>
+          <button id="song-button">
+            <img
+              id="song-img"
+              src="/assignment2/assets/images/back.png"
+              alt="Back Button"
+              width="32"
+              height="24"
+            />
+          </button>
+        </div>
+        <div>
+          <button id="playlist-button">
+            <img
+              id="playlist-img"
+              src="/assignment2/assets/images/back.png"
+              alt="Back Button"
+              width="32"
+              height="24"
+            />
+          </button>
+        </div>
+      </div>
+      <div id="contentManager">
+        <h1>Playlists</h1>
+        <section id="albumGrid">
+          <div class="album"></div>
+          <div class="album"></div>
+          <div class="album"></div>
+          <div class="album"></div>
+          <div class="playlistName">Playlist 1</div>
+          <div class="playlistName">Playlist 2</div>
+          <div class="playlistName">Playlist 3</div>
+          <div class="playlistName">Playlist 4</div>
+          <div class="album"></div>
+          <div class="album"></div>
+          <div></div>
+          <div></div>
+          <div class="playlistName">Playlist 5</div>
+          <div class="playlistName">Playlist 6</div>
+        </section>
+        <section id="nameGrid">
+          <div class="playlistName"></div>
+          <div class="playlistName"></div>
+          <div class="playlistName"></div>
+          <div class="playlistName"></div>
+        </section>
+      </div>
+      <div id="UIimagesTwo">
+        <p>hello</p>
+        <p>hello</p>
+      </div>
+    </div>
     <div class="audio-player">
       <div class="player-content">
         <audio
