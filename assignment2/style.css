@@ -48,6 +48,10 @@ button {
   border: 0;
   background-color: var(--mainwhite);
   padding-inline: 1rem;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 10px;
+  border: 5px solid #d9d9d9;
 }
 
 .audio-list {
@@ -159,5 +163,25 @@ h1 {
 #mainUI {
   display: flex;
   flex-direction: row;
+  align-items: center;
+}
+
+#playlist-button {
+  background-color: var(--maincolor);
+  margin: 10px;
+  padding: 10px;
+  border: 5px solid #d9d9d9;
+  border-radius: 10px;
+}
+
+#UIimagesOne {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#UIimagesTwo {
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
