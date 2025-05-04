@@ -1,4 +1,4 @@
-//array of differant songs in que
+//array of differant songs in queue
 const audioList = [
   {
     name: "Deep Ambient Relaxation Music",
@@ -17,17 +17,17 @@ const audioList = [
   },
 ];
 
+//picture in picture allows toggled functionality
 var pipActive = false;
 
-//finding song name, audio data, play/pause button,
+//finding song name, audio data, play/pause image/button,
 const audioName = document.querySelector("#audio-name");
 const audioArtist = document.querySelector("#audio-artist");
 const myAudio = document.querySelector("#my-audio");
+const playPauseImg = document.querySelector("#play-pause-img");
 const playPauseButton = document.querySelector("#play-pause-button");
 
 playPauseButton.addEventListener("click", playPauseAudio);
-
-const playPauseImg = document.querySelector("#play-pause-img");
 
 //change icon and functionality when button pressed
 function playPauseAudio() {
@@ -38,6 +38,7 @@ function playPauseAudio() {
   }
 }
 
+//move to next song in queue
 myAudio.addEventListener("ended", nextup);
 function nextup() {
   console.log("next track loading");
@@ -46,6 +47,7 @@ function nextup() {
   playAudioAtIndex(currentIndex);
 }
 
+//play and pause images
 myAudio.addEventListener("play", () => {
   playPauseImg.src = "/assignment2/assets/images/pause.png";
 });
@@ -54,21 +56,18 @@ myAudio.addEventListener("pause", () => {
   playPauseImg.src = "/assignment2/assets/images/play.png";
 });
 
+//progress bar variable
 const progressBar = document.querySelector("#progress-bar-fill");
-
 myAudio.addEventListener("timeupdate", updateProgressBar);
 
-// const audioTime = document.querySelector("#audio-time");
-
-//we increase the width of the progress bar depending on the percentage
-// how much audio is played in comparison to how much is left or its duration.
+//width of progrss bar effectivly increased based on differance in audio current time and length.
 function updateProgressBar() {
-  //   audioTime.textContent = myAudio.currentTime.toFixed(0) / 100;
   const value = (myAudio.currentTime / myAudio.duration) * 100;
   progressBar.style.width = value + "%";
 }
 
-//maintain style in pip
+//picture in picture code
+//taken fromn chrome developer tools: https://developer.chrome.com/docs/web-platform/document-picture-in-picture
 pipButton.addEventListener("click", async () => {
   if (pipActive == false) {
     const player = document.querySelector(".player-content");
@@ -113,25 +112,8 @@ pipButton.addEventListener("click", async () => {
   }
 });
 
-// const pipButton = document.getElementById("pipButton");
-
-// pipButton.addEventListener("click", async () => {
-//   try {
-//     if (document.pictureInPictureElement) {
-//       await document.exitPictureInPicture();
-//     } else {
-//       // Must be playing to enter PiP in some browsers
-//       if (myAudio.paused) await myAudio.play();
-//       await myAudio.requestPictureInPicture();
-//     }
-//   } catch (error) {
-//     console.error("PiP error:", error);
-//   }
-// });
-
 //-----------------------//
-//code taken from class example
-// The following code allows moving to previous and next audio or audio
+// allows moving between previous and next audio
 
 //getting the buttons from the html and running function when clicked
 const backButton = document.querySelector("#back-button");
@@ -145,10 +127,8 @@ let currentIndex = 0;
 
 audioName.textContent = audioList[currentIndex].name;
 audioArtist.textContent = audioList[currentIndex].artist;
-console.log(`${audioList[currentIndex].name}`);
-console.log(`${audioList[currentIndex].artist}`);
 
-//function to go back in queue and
+//function to go back in queue
 function prevTrack() {
   console.log("previous track loading");
   currentIndex = (currentIndex - 1 + audioList.length) % audioList.length;
@@ -158,6 +138,7 @@ function prevTrack() {
   playAudioAtIndex(currentIndex);
 }
 
+//function to go forward in queue
 function nextTrack() {
   console.log("next track loading");
   currentIndex = (currentIndex + 1) % audioList.length;
@@ -169,10 +150,10 @@ function nextTrack() {
 
 // Function to play audio at a specific index
 function playAudioAtIndex(index) {
-  //   myAudio.pause(); // Pause the audio before changing source
+  myAudio.pause();
   console.log(audioList[index].link);
   myAudio.src = audioList[index].link;
-  myAudio.load(); // Load the new source
+  myAudio.load();
   if (myAudio.play) {
     myAudio.play();
   } else if (myAudio.pause) {

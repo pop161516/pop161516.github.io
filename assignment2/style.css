@@ -1,20 +1,19 @@
-/* https://colorhunt.co/palette/1a120b3c2a21d5cea3e5e5cb */
 :root {
   --maincolor: #452545;
   --secondarycolor: #604060;
   --mainwhite: #d9d9d9;
-  --secondarywhite: ;
+  /* note that images use colours that cannot be altered */
 }
 
 body {
   background-color: var(--maincolor);
   display: flex;
-  /* text-align: center; */
   margin: auto;
   max-width: 1000px;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  /* font */
   font-family: "Space Grotesk", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
@@ -29,10 +28,8 @@ body {
   padding: 30px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  /* align-items: center; */
+  justify-content: center;
   gap: 1rem;
-  /* flex-wrap: wrap; */
 }
 
 .audio-player {
@@ -49,9 +46,26 @@ button {
   background-color: var(--mainwhite);
   padding-inline: 1rem;
   border-radius: 10px;
+  margin: 1px;
+  padding: 1;
+}
+
+.UIimage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 0;
+  background-color: var(--mainwhite);
+  padding-inline: 1rem;
+  border-radius: 10px;
   margin: 10px;
   padding: 10px;
   border: 5px solid #d9d9d9;
+}
+
+.audio-controls button {
+  padding: none;
+  margin: none;
 }
 
 .audio-list {
@@ -120,7 +134,6 @@ button {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-top: 10px;
   justify-content: center;
 }
 
@@ -133,7 +146,6 @@ button {
 }
 
 #contentManager {
-  /* margin: 60px; */
   width: 500px;
   min-height: 400px;
   border-radius: 50px;
@@ -172,16 +184,4 @@ h1 {
   padding: 10px;
   border: 5px solid #d9d9d9;
   border-radius: 10px;
-}
-
-#UIimagesOne {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#UIimagesTwo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
