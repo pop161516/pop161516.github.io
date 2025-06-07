@@ -25,11 +25,11 @@ function scroll() {
 
   const currentActiveSrc = vid.currentSrc || "";
   const lobbyVid = currentActiveSrc === lobbyVidSource;
-  const recVid = currentActiveSrc === recVidVidSource;
+  const recVid = currentActiveSrc === recVidSource;
   const floorVid = currentActiveSrc === floorVidSource;
 
   console.log(
-    `lobbyVid: ${lobbyVid}, recVidVid: ${recVidVid}, floorVid: ${floorVid}`
+    `lobbyVid: ${lobbyVid}, recVid: ${recVid}, floorVid: ${floorVid}`
   );
 
   let showFirstButton = false;
@@ -39,7 +39,7 @@ function scroll() {
     showFirstButton = percentage >= 0.95;
     changeVideoButton.textContent = "Explore Equipment Rental";
     highlightFirstButton = showFirstButton;
-  } else if (recVidVid) {
+  } else if (recVid) {
     showFirstButton = percentage <= 0.05;
     changeVideoButton.textContent = "Return to Main";
     highlightFirstButton = showFirstButton;
@@ -128,7 +128,9 @@ vid.addEventListener("loadedmetadata", () => {
     scrollToBottomOnLoad = false;
   } else {
     window.scrollTo({ top: 0, behavior: "instant" });
+    vid.currentTime = 0;
   }
+  scroll();
 });
 
 window.addEventListener("scroll", scroll);
