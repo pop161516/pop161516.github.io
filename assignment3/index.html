@@ -6,13 +6,119 @@
     <title>Assignment3</title>
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js" defer></script>
+    <style>
+      /* Basic styling for the button to center it */
+      .center-button {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 15px 30px;
+        font-size: 1.2em;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        z-index: 100; /* Ensure it's above other content */
+        display: none; /* Hidden by default */
+      }
+
+      /* Basic styling for the video section - ensure it's tall enough to scroll */
+      .vid {
+        height: 200vh; /* Example: make it 200% of viewport height for scrolling */
+        overflow: hidden; /* Prevent scrollbars from inner content */
+        position: relative;
+      }
+
+      .holder video {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    </style>
   </head>
   <body>
     <section class="vid">
       <div class="holder">
-        <video src="vid.mp4" autoplay muted loop playsinline></video>
+        <video src="vid.mp4" muted loop playsinline></video>
       </div>
     </section>
+
+    <button id="changeVideoButton" class="center-button">
+      Watch New Video
+    </button>
+
+    <script>
+      const section = document.querySelector("section.vid");
+      const vid = section.querySelector("video");
+      const changeVideoButton = document.getElementById("changeVideoButton");
+
+      // Define your new video source here
+      const newVideoSource = "new_vid.mp4"; // Make sure you have this video file
+
+      // IMPORTANT: Pause the video initially.
+      // The scroll function will control playback.
+      vid.pause();
+
+      const scroll = () => {
+        const distance = window.scrollY - section.offsetTop;
+        const total = section.clientHeight - window.innerHeight;
+
+        let percentage = distance / total;
+        percentage = Math.max(0, percentage);
+        percentage = Math.min(percentage, 1);
+
+        // Ensure video duration is available before attempting to set currentTime
+        // If duration is 0, the video might still be loading or not properly initialized.
+        if (vid.duration > 0 && !isNaN(vid.duration)) {
+          vid.currentTime = vid.duration * percentage;
+        } else {
+          // If duration is not available, try to load meta data.
+          // This can happen if the video source was just changed.
+          vid.load();
+        }
+
+        // Logic to show/hide the button when the video is at the end of its scroll-playback
+        // Adjust the threshold (e.g., 0.999) based on how precisely you want to detect the end
+        if (percentage >= 0.999 && vid.duration > 0 && !isNaN(vid.duration)) {
+          changeVideoButton.style.display = "block"; // Show the button
+        } else {
+          changeVideoButton.style.display = "none"; // Hide the button if not at the end
+        }
+      };
+
+      // Event listener for the button click
+      changeVideoButton.addEventListener("click", () => {
+        vid.src = newVideoSource; // Change the video source
+        vid.load(); // Load the new video
+        vid.pause(); // Ensure the new video is paused for scroll control
+        changeVideoButton.style.display = "none"; // Hide the button after click
+
+        // Scroll to the top and ensure the scroll function updates the video immediately
+        window.scrollTo({ top: 0 });
+
+        // A small delay to ensure the scroll has registered and the video metadata is loaded
+        // before the scroll function attempts to set currentTime on the new video.
+        // This can help with initial frame display.
+        setTimeout(() => {
+          scroll(); // Call scroll after changing source and resetting scroll
+        }, 100);
+      });
+
+      // Listen for when the video metadata has loaded (important for duration)
+      // This helps in cases where the video source is changed dynamically.
+      vid.addEventListener("loadedmetadata", () => {
+        scroll(); // Ensure the video position is updated once metadata is ready
+      });
+
+      // Initial call to set the video position based on current scroll
+      scroll();
+      // Listen for scroll events to control the video
+      window.addEventListener("scroll", scroll);
+    </script>
   </body>
 </html>
