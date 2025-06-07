@@ -49,7 +49,7 @@
     </section>
 
     <button id="changeVideoButton" class="center-button">
-      Explore Equiptment rental
+      Explore Equipment Rental
     </button>
 
     <script>
@@ -73,61 +73,114 @@
 
         const distance = window.scrollY - section.offsetTop;
         const total = section.clientHeight - window.innerHeight;
-        let percentage = Math.max(0, Math.min(1, distance / total));
+        const percentage = Math.max(0, Math.min(1, distance / total));
 
         vid.currentTime = vid.duration * percentage;
 
-        const currentSrc =
-          vid.querySelector("source")?.getAttribute("src") || "";
+        const currentSrc = vid.currentSrc || "";
+        console.log("currentSrc =", currentSrc);
 
-        const isInitialVideo = currentSrc.includes(initialVideoSource);
-        const isNewVideo = currentSrc.includes(newVideoSource);
+        // Extract just the filename from the currentSrc
+        const currentFileName = currentSrc.substring(
+          currentSrc.lastIndexOf("/") + 1
+        );
 
-        const atEndOfInitial = isInitialVideo && percentage >= 0.95;
-        const atStartOfNew = isNewVideo && percentage <= 0.05;
+        const isInitialVideo = currentFileName === "vid.mp4"; // Check for exact filename
+        const isNewVideo = currentFileName === "new_vid.mp4"; // Check for exact filename
+        console.log(
+          "isInitialVideo:",
+          isInitialVideo,
+          "isNewVideo:",
+          isNewVideo
+        );
 
-        // ✅ Show button ONLY if:
-        // 1. We're at the end of the initial video
-        // 2. OR we're at the *start* of the new video
-        if (atEndOfInitial || atStartOfNew) {
-          changeVideoButton.style.display = "block";
-        } else {
-          changeVideoButton.style.display = "none";
+        let showButton = false;
+
+        if (isInitialVideo) {
+          showButton = percentage >= 0.95;
+          changeVideoButton.textContent = "Explore Equipment Rental"; // Set button label for initial video
+        } else if (isNewVideo) {
+          showButton = percentage <= 0.05;
+          changeVideoButton.textContent = "Return to Main"; // Set button label for new video
         }
+
+        changeVideoButton.style.display = showButton ? "block" : "none";
       }
 
+      // In your switchVideo function, make sure the button label is consistent
       function switchVideo(src, buttonLabel) {
         vid.pause();
 
-        // Replace <source> and reload
-        vid.innerHTML = `<source src="${src}" type="video/mp4">`;
-        vid.load();
+        // Remove old source(s)
+        while (vid.firstChild) {
+          vid.removeChild(vid.firstChild);
+        }
 
-        changeVideoButton.textContent = buttonLabel;
+        // Add new <source>
+        const newSource = document.createElement("source");
+        newSource.setAttribute("src", src);
+        newSource.setAttribute("type", "video/mp4");
+        vid.appendChild(newSource);
+
+        vid.load();
+        // No need to set changeVideoButton.textContent here as it's handled in scroll()
         changeVideoButton.style.display = "none";
 
-        // Scroll to top and wait for metadata to load
+        // Scroll to top and wait for metadata
         window.scrollTo({ top: 0 });
       }
 
       changeVideoButton.addEventListener("click", () => {
-        const currentSrc =
-          vid.querySelector("source")?.getAttribute("src") || "";
-        if (currentSrc.includes(initialVideoSource)) {
-          switchVideo(newVideoSource, "Explore Equiptment rental");
+        const currentSrc = vid.currentSrc || "";
+        const currentFileName = currentSrc.substring(
+          currentSrc.lastIndexOf("/") + 1
+        );
+
+        if (currentFileName === "vid.mp4") {
+          switchVideo(newVideoSource); // No need to pass button label here, it's set in scroll()
         } else {
-          switchVideo(initialVideoSource, "???");
+          switchVideo(initialVideoSource); // No need to pass button label here, it's set in scroll()
+        }
+      });
+
+      function switchVideo(src, buttonLabel) {
+        vid.pause();
+
+        // Remove old source(s)
+        while (vid.firstChild) {
+          vid.removeChild(vid.firstChild);
+        }
+
+        // Add new <source>
+        const newSource = document.createElement("source");
+        newSource.setAttribute("src", src);
+        newSource.setAttribute("type", "video/mp4");
+        vid.appendChild(newSource);
+
+        vid.load();
+        changeVideoButton.textContent = buttonLabel;
+        changeVideoButton.style.display = "none";
+
+        // Scroll to top and wait for metadata
+        window.scrollTo({ top: 0 });
+      }
+
+      changeVideoButton.addEventListener("click", () => {
+        const currentSrc = vid.currentSrc || "";
+        if (currentSrc.includes(initialVideoSource)) {
+          switchVideo(newVideoSource, "Explore Equipment Rental");
+        } else {
+          switchVideo(initialVideoSource, "Explore Equipment Rental");
         }
       });
 
       vid.addEventListener("loadedmetadata", () => {
         console.log("--- loadedmetadata event fired! ---");
-        scroll(); // Now it's safe to calculate video duration
+        setTimeout(scroll, 10); // slight delay to ensure duration is available
       });
 
-      // Initial setup
       window.addEventListener("scroll", scroll);
-      window.addEventListener("DOMContentLoaded", scroll); // Just in case
+      window.addEventListener("DOMContentLoaded", scroll);
     </script>
   </body>
 </html>
