@@ -80,14 +80,17 @@
         const currentSrc =
           vid.querySelector("source")?.getAttribute("src") || "";
 
-        const atEndOfInitial =
-          currentSrc.includes(initialVideoSource) && percentage >= 0.98;
-        const atStartOfNew =
-          currentSrc.includes(newVideoSource) && percentage <= 0.02;
+        const isInitialVideo = currentSrc.includes(initialVideoSource);
+        const isNewVideo = currentSrc.includes(newVideoSource);
 
+        const atEndOfInitial = isInitialVideo && percentage >= 0.95;
+        const atStartOfNew = isNewVideo && percentage <= 0.05;
+
+        // ✅ Show button ONLY if:
+        // 1. We're at the end of the initial video
+        // 2. OR we're at the *start* of the new video
         if (atEndOfInitial || atStartOfNew) {
           changeVideoButton.style.display = "block";
-          console.log(`${currentSrc} = SRC and ${percentage} = percentage`);
         } else {
           changeVideoButton.style.display = "none";
         }
