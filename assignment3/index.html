@@ -81,9 +81,9 @@
           vid.querySelector("source")?.getAttribute("src") || "";
 
         const atEndOfInitial =
-          currentSrc.includes(initialVideoSource) && percentage >= 0.95;
+          currentSrc.includes(initialVideoSource) && percentage >= 0.98;
         const atStartOfNew =
-          currentSrc.includes(newVideoSource) && percentage <= 0.05;
+          currentSrc.includes(newVideoSource) && percentage <= 0.02;
 
         if (atEndOfInitial || atStartOfNew) {
           changeVideoButton.style.display = "block";
@@ -103,16 +103,16 @@
         changeVideoButton.style.display = "none";
 
         // Scroll to top and wait for metadata to load
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo({ top: 0 });
       }
 
       changeVideoButton.addEventListener("click", () => {
         const currentSrc =
           vid.querySelector("source")?.getAttribute("src") || "";
         if (currentSrc.includes(initialVideoSource)) {
-          switchVideo(newVideoSource, "Back to First Video");
+          switchVideo(newVideoSource, "Work in progresss??");
         } else {
-          switchVideo(initialVideoSource, "Watch New Video");
+          switchVideo(initialVideoSource, "Explore Equiptment rental");
         }
       });
 
